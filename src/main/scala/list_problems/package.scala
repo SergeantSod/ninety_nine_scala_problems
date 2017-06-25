@@ -176,15 +176,33 @@ package object list_problems {
     }
   }
 
-  def split[V](length: Int, elements: List[V]):(List[V], List[V]) = splitInto[V](length, List(), elements)
+  def split[V](length: Int, elements: List[V]): (List[V], List[V]) = splitInto[V](length, List(), elements)
 
   @tailrec
   def splitInto[V](length: Int, prefix: List[V], suffix: List[V]): (List[V], List[V]) = {
     suffix match {
       case Nil => (prefix.reverse, suffix)
-      case head::tail => length match {
+      case head :: tail => length match {
         case 0 => (prefix.reverse, suffix)
-        case n => splitInto(n-1, head::prefix, tail)
+        case n => splitInto(n - 1, head :: prefix, tail)
+      }
+    }
+  }
+
+  def slice[V](startIndex: Int, endIndex: Int, elements: List[V]): List[V] = sliceInto(startIndex, endIndex, elements, List()).reverse
+
+  @tailrec
+  def sliceInto[V](startIndex: Int, endIndex: Int, elements: List[V], result: List[V]): List[V] = {
+    elements match {
+      case Nil => result
+      case head :: tail => {
+        if (endIndex <= 0) {
+          result
+        } else if (startIndex == 0) {
+          sliceInto(0, endIndex - 1, tail, head :: result)
+        } else {
+          sliceInto(startIndex - 1, endIndex - 1, tail, result)
+        }
       }
     }
   }

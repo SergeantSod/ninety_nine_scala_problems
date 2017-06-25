@@ -84,4 +84,8 @@ class ListProblemSpecs extends FunSpec with Matchers with TypeCheckedTripleEqual
   it("splits a list into two parts"){
     split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should ===(List('a, 'b, 'c), List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
   }
+
+  it("extracts a slice from a list"){
+    slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should ===(List('d, 'e, 'f, 'g))
+  }
 }
