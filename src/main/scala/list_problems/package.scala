@@ -161,4 +161,20 @@ package object list_problems {
 
   def replicateElements[V](count: Int, elements: List[V]) = replicateElementsInto(elements, count, count, List()).reverse
 
+  def dropEveryNth[V](count: Int, elements: List[V]): List[V] = {
+    require(count >= 1, "Count must be greater than or equal to 1.")
+    dropEveryNthElementInto(elements, count, count, List()).reverse
+  }
+
+  @tailrec
+  def dropEveryNthElementInto[V](elements: List[V], currentCount: Int, desiredCount: Int, result: List[V]): List[V] = {
+    //It's amazing how similar this is to the recursion in replicateElementsInto
+    elements match {
+      case Nil => result
+      case head :: tail => currentCount match {
+        case 1 => dropEveryNthElementInto(tail, desiredCount, desiredCount, result)
+        case n => dropEveryNthElementInto(tail, n - 1, desiredCount, head :: result)
+      }
+    }
+  }
 }

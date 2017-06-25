@@ -9,7 +9,6 @@ import scala.reflect.ClassTag
 
 class ListProblemSpecs extends FunSpec with Matchers with TypeCheckedTripleEquals {
 
-
   it("finds the last element"){
     last(List(1, 1, 2, 3, 5, 8)) should ===(8)
   }
@@ -78,5 +77,7 @@ class ListProblemSpecs extends FunSpec with Matchers with TypeCheckedTripleEqual
     replicateElements(3, List('a, 'b, 'c, 'c, 'd)) should ===(List('a, 'a, 'a, 'b, 'b, 'b, 'c, 'c, 'c, 'c, 'c, 'c, 'd, 'd, 'd))
   }
 
-
+  it("drops every n-th element from a list"){
+    dropEveryNth(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should ===(List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
+  }
 }
