@@ -1,8 +1,5 @@
 import scala.annotation.tailrec
 
-/**
-  * Created by jp on 02.06.17.
-  */
 package object list_problems {
 
   def encode[A](elements: List[A]): List[(Int, A)] = {
