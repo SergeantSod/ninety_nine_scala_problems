@@ -175,4 +175,17 @@ package object list_problems {
       }
     }
   }
+
+  def split[V](length: Int, elements: List[V]):(List[V], List[V]) = splitInto[V](length, List(), elements)
+
+  @tailrec
+  def splitInto[V](length: Int, prefix: List[V], suffix: List[V]): (List[V], List[V]) = {
+    suffix match {
+      case Nil => (prefix.reverse, suffix)
+      case head::tail => length match {
+        case 0 => (prefix.reverse, suffix)
+        case n => splitInto(n-1, head::prefix, tail)
+      }
+    }
+  }
 }

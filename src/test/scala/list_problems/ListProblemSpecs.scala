@@ -80,4 +80,8 @@ class ListProblemSpecs extends FunSpec with Matchers with TypeCheckedTripleEqual
   it("drops every n-th element from a list"){
     dropEveryNth(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should ===(List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k))
   }
+
+  it("splits a list into two parts"){
+    split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should ===(List('a, 'b, 'c), List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
+  }
 }
