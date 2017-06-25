@@ -193,16 +193,15 @@ package object list_problems {
 
   @tailrec
   def sliceInto[V](startIndex: Int, endIndex: Int, elements: List[V], result: List[V]): List[V] = {
+    require(startIndex >= 0, "startIndex must be greater than or equal to 0.")
+    require(endIndex >= startIndex, "endIndex must be greater than startIndex.")
+
     elements match {
       case Nil => result
-      case head :: tail => {
-        if (endIndex <= 0) {
-          result
-        } else if (startIndex == 0) {
-          sliceInto(0, endIndex - 1, tail, head :: result)
-        } else {
-          sliceInto(startIndex - 1, endIndex - 1, tail, result)
-        }
+      case head :: tail => (startIndex, endIndex) match {
+        case (_, 0) => result
+        case (0, _) => sliceInto(0, endIndex - 1, tail, head :: result)
+        case _ => sliceInto(startIndex - 1, endIndex - 1, tail, result)
       }
     }
   }
