@@ -104,6 +104,7 @@ package object list_problems {
 
   def compress[A](elements: List[A]): List[A] = reverseCompressInto(elements, List()).reverse
 
+  @tailrec
   def reverseCompressInto[A](elements: List[A], target: List[A]): List[A] = {
     elements match {
       case Nil => target
